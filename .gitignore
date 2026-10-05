@@ -1,0 +1,6 @@
+target/
+secret.bin
+
+# Editor/OS cruft
+.DS_Store
+*.swp

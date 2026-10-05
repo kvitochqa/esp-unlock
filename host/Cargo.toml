@@ -1,0 +1,18 @@
+[package]
+name = "esp-unlock-host"
+version = "0.1.0"
+edition = "2024"
+description = "Host daemon for esp-unlock: syncs a GNOME session lock/unlock with a physical ESP32 key"
+license = "MIT OR Apache-2.0"
+
+[[bin]]
+name = "esp-unlock-daemon"
+path = "src/main.rs"
+
+[dependencies]
+serialport = { version = "4", default-features = false }
+esp-unlock-protocol = { path = "../protocol" }
+rand = "0.8"
+
+[profile.release]
+opt-level = 2

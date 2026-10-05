@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: test (${{ matrix.crate }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        crate: [protocol, host]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - run: cargo test
+        working-directory: ${{ matrix.crate }}
+      - run: cargo clippy --all-targets -- -D warnings
+        working-directory: ${{ matrix.crate }}
+
+  # The firmware crate targets xtensa-esp32-none-elf and needs the Espressif
+  # Rust fork (via espup), which isn't available as a stock GitHub-hosted
+  # toolchain. Building it in CI is intentionally left out for now; see
+  # https://github.com/esp-rs/espup for the toolchain this project builds
+  # with locally.

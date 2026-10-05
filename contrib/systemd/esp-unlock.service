@@ -1,0 +1,15 @@
+[Unit]
+Description=ESP32 physical-key screen lock/unlock daemon
+After=graphical-session.target
+
+[Service]
+Type=simple
+# Adjust these two paths for your setup. ESP_UNLOCK_SECRET_PATH must point at
+# the same secret.bin that was baked into the firmware you flashed.
+Environment=ESP_UNLOCK_SECRET_PATH=%h/esp-unlock/firmware/secret.bin
+ExecStart=%h/esp-unlock/host/target/release/esp-unlock-daemon
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target

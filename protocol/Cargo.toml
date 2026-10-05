@@ -1,0 +1,13 @@
+[package]
+name = "esp-unlock-protocol"
+version = "0.1.0"
+edition = "2024"
+description = "Shared wire protocol and HMAC helpers for esp-unlock (firmware + host)"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+hmac = { version = "0.12", default-features = false }
+sha2 = { version = "0.10", default-features = false }
+
+[dev-dependencies]
+hex = "0.4"
